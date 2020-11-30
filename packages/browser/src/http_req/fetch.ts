@@ -1,4 +1,4 @@
-import fetch from 'cross-fetch';
+//import fetch from 'cross-fetch';
 import Promise from 'promise-polyfill';
 import { errors, IHttpRequest, IHttpResponse } from './api';
 
@@ -14,7 +14,7 @@ export function request(req: IHttpRequest): Promise<IHttpResponse> {
     method: req.method,
     body: req.body,
   };
-  return fetch(req.url, opt).then((resp: Response) => {
+  return fetch(req.url, {method: opt.method, body: opt.body}).then((resp: Response) => {
     if (resp.status === 401) {
       throw errors.unauthorized;
     }
